@@ -349,8 +349,6 @@ call :_color %Green% "IDM is successfully activated."
 powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!')"
 
 
-echo:
-::call :_color %Gray% "If fake serial screen appears, run activation again, after that it wont appear."
 goto done
 )
 
