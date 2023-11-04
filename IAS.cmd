@@ -26,7 +26,7 @@
 @echo off
 
 echo.
-powershell.exe -command "Write-Host '                    ==========  Microsoft Office Activation  ==========' -ForegroundColor Green"
+powershell.exe -command "Write-Host '                    ==========  Internet Download Manager Activation  ==========' -ForegroundColor Green"
 echo.
 
 :handleAuthKey
