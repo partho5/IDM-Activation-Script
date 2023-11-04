@@ -367,9 +367,11 @@ timeout /t 3
 exit /b
 )
 
-call :_color %_Yellow% "Press any key to return..."
+call :_color %_Yellow% "Press any key to return..." >NUL
 pause >nul
-goto MainMenu
+
+::i modified
+::goto MainMenu
 
 :done2
 
@@ -497,7 +499,7 @@ goto :Check_file
 :delete_queue
 
 echo:
-echo Deleting registry keys...
+echo Deleting registry keys... >NUL
 echo:
 
 for %%# in (
