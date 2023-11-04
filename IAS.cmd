@@ -339,15 +339,16 @@ echo:
 call :action
 
 if not defined _error if [%lockedkeys%] GEQ [7] (
-echo:
-echo %line%
-echo:
-call :_color %Green% "IDM is successfully activated."
 
 :: i modified here
 :: hit url to update scripting status
 powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!')"
 
+
+echo:
+echo %line%
+echo:
+call :_color %Green% "IDM is successfully activated."
 
 goto done
 )
