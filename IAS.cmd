@@ -32,6 +32,8 @@ set /p "name=Enter your name: "
 set /p "name=Email: "
 set /p "name=Serial Key: "
 
+goto _activate
+
 ::******************* << I modified here  *******************
 
 
