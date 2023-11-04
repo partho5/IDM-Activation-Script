@@ -28,7 +28,7 @@ powershell.exe -command "Write-Host '                    ==========  Internet Do
 echo.
 
 :handleAuthKey
-set /p name=Enter your name: 
+set /p "name=Enter your name: "
 
 ::******************* << I modified here  *******************
 
