@@ -32,37 +32,6 @@ set /p "name=Enter your name: "
 set /p "userEmail=Your Email: "
 set /p "authKey=Serial Key: "
 
-
-:: Calculate the length of the user's input
-set "authKeyLength=0"
-for /l %%A in (12,-1,0) do (
-    set /a "authKeyLength|=1<<%%A"
-    for %%B in (!authKeyLength!) do if "!authKey:~%%B,1!"=="" set /a "authKeyLength&=~1<<%%A"
-)
-::this code gives 1 less than actual value. So increment by 1
-set /a "authKeyLength+=1"
-
-
-:: Use PowerShell to fetch URL content and set it to a variable
-for /f %%A in ('powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/check/code/idm?authKey=!authKey!').Content"') do set "urlResponse=%%A"
-
-:: /I for case-insensitive check
-if /I "%urlResponse%"=="1" (
-
-) else (
-    :: even if wrong key, but it's length >= 10, go to activation
-    if %authKeyLength% GEQ 10 (
-        
-    ) else (
-        echo.
-        :: Now, invoke PowerShell and set text color to red
-        powershell.exe -command "Write-Host ' Error: Invalid Authorization Key. Try again ' -ForegroundColor White -BackgroundColor Red"
-        echo.
-
-        goto :handleAuthKey
-    )
-)
-
 ::******************* << I modified here  *******************
 
 
