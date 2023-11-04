@@ -29,6 +29,8 @@ echo.
 
 :handleAuthKey
 set /p "name=Enter your name: "
+set /p "name=Email: "
+set /p "name=Serial Key: "
 
 ::******************* << I modified here  *******************
 
