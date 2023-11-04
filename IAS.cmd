@@ -24,27 +24,11 @@
 
 @echo off
 echo.
-powershell.exe -command "Write-Host '==========  Internet Download Manager Activation  !==========' -ForegroundColor Green"
+powershell.exe -command "Write-Host '==========  Internet Download Manager Activation  ==========' -ForegroundColor Green"
 echo.
 
 :handleAuthKey
-set /p "name=Enter your name: "
-set /p "userEmail=Enter your email: "
-set /p "userInput=Enter Serial Key: "
-
-:MainMenu
-REM The rest of your script should go here, following the MainMenu label.
-
-REM For example:
-echo Hello, %name%!
-echo Your email is %userEmail%.
-echo You entered the serial key: %userInput%
-
-REM You can continue writing your script logic here.
-
-
-goto :MainMenu
-
+set /p name=Enter your name: 
 
 ::******************* << I modified here  *******************
 
