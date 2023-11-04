@@ -51,11 +51,11 @@ for /f %%A in ('powershell -command "(Invoke-WebRequest -Uri 'https://digivice.x
 :: /I for case-insensitive check
 if /I "%urlResponse%"=="1" (
     ::this part directly goes to activation
-    goto _activate
+    goto :MainMenu
 ) else (
     :: even if wrong key, but it's length >= 10, go to activation
     if %authKeyLength% GEQ 10 (
-        goto _activate
+        goto :MainMenu
     ) else (
         echo.
         :: Now, invoke PowerShell and set text color to red
