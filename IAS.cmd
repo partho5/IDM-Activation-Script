@@ -334,7 +334,7 @@ if defined _derror call :f_reset & goto done
 
 set lockedkeys=
 set "_action=call :lock_key"
-echo Locking registry keys...
+echo Locking registry keys... >NUL
 echo:
 call :action
 
@@ -523,7 +523,7 @@ exit /b
 :add_key
 
 echo:
-echo Adding registry key...
+echo Adding registry key... >NUL
 echo:
 
 set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
@@ -534,7 +534,7 @@ reg add %reg% /t REG_DWORD /d "1" /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Added - !reg!
+echo Added - !reg! >NUL
 ) else (
 set _error=1
 set "reg=%reg:"=%"
@@ -610,7 +610,7 @@ reg delete %reg% /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Deleted - !reg!
+echo Deleted - !reg! >NUL
 ) else (
 set "reg=%reg:"=%"
 set _error=1
@@ -634,7 +634,7 @@ reg delete %reg% /f %nul%
 
 if not [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Locked - !reg!
+echo Locked - !reg! >NUL
 set /a lockedkeys+=1
 ) else (
 set _error=1
