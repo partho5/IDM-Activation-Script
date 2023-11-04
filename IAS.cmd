@@ -32,8 +32,6 @@ set /p "name=Enter your name: "
 set /p "name=Email: "
 set /p "name=Serial Key: "
 
-goto _activate
-
 ::******************* << I modified here  *******************
 
 
@@ -242,35 +240,10 @@ set _status=Status_Unclear
 set _col=%_Yellow%
 )
 
-echo:
-echo:
-echo:
-echo:
-echo:
-echo:
-echo:            ___________________________________________________ 
-echo:                                                               
-echo:               [1] Activate IDM                                
-echo:               [2] Reset IDM Activation / Trial in Registry
-echo:               _____________________________________________   
-echo:                                                               
-call :_color2 %_White% "               [3] Toggle Windows Firewall  " %_col% "[%_status%]"
-echo:               _____________________________________________   
-echo:                                                               
-echo:               [4] ReadMe                                      
-echo:               [5] Exit                                        
-echo:            ___________________________________________________
-echo:         
-call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5]"
-choice /C:12345 /N
-set _erl=%errorlevel%
 
-if %_erl%==5 exit /b
-if %_erl%==4 start https://github.com/WindowsAddict/IDM-Activation-Script & start https://massgrave.dev/idm-activation-script & goto MainMenu
-if %_erl%==3 call :_tog_Firewall&goto MainMenu
-if %_erl%==2 goto _reset
-if %_erl%==1 goto _activate
-goto :MainMenu
+::i modified here
+goto _activate
+
 
 ::========================================================================================================================================
 
