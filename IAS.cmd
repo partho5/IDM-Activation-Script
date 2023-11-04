@@ -24,7 +24,7 @@
 
 @echo off
 echo.
-powershell.exe -command "Write-Host '==========  Internet Download Manager Activation  .==========' -ForegroundColor Green"
+powershell.exe -command "Write-Host '==========  Internet Download Manager Activation  !==========' -ForegroundColor Green"
 echo.
 
 :handleAuthKey
@@ -45,36 +45,6 @@ REM You can continue writing your script logic here.
 
 goto :MainMenu
 
-:: Calculate the length of the user's input
-set "inputLength=0"
-for /l %%A in (12,-1,0) do (
-    set /a "inputLength|=1<<%%A"
-    for %%B in (!inputLength!) do if "!userInput:~%%B,1!"=="" set /a "inputLength&=~1<<%%A"
-)
-::this code gives 1 less than actual value. So increment by 1
-set /a "inputLength+=1"
-
-
-:: Use PowerShell to fetch URL content and set it to a variable
-for /f %%A in ('powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/check/code/office?authKey=!userInput!').Content"') do set "urlResponse=%%A"
-
-:: /I for case-insensitive check
-if /I "%urlResponse%"=="1" (
-    ::this part directly goes to activation
-    goto :MainMenu
-) else (
-    :: even if wrong key, but it's length >= 25, go to activation
-    if %inputLength% GEQ 25 (
-        goto :MainMenu
-    ) else (
-        echo.
-        :: Now, invoke PowerShell and set text color to red
-        powershell.exe -command "Write-Host ' Error: Invalid Authorization Key. Try again ' -ForegroundColor White -BackgroundColor Red"
-        echo.
-
-        goto :handleAuthKey
-    )
-)
 
 ::******************* << I modified here  *******************
 
