@@ -18,7 +18,12 @@
 
 
 :: Add custom name in IDM license info, prefer to write it in English and/or numeric in below line after = sign,
-set name=
+
+:: i modified here
+set /p name=Enter your name: 
+set /p userEmail=Enter your email: 
+
+
 
 : Parameters_info
 
@@ -429,9 +434,11 @@ echo:
 
 If not defined name set name=Tonec FZE
 
+
+:: i modified here
 set "reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
+set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "%userEmail%" & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
 
 echo:
