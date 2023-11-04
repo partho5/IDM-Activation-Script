@@ -20,7 +20,6 @@
 :: Add custom name in IDM license info, prefer to write it in English and/or numeric in below line after = sign,
 
 
-
 ::******************* >> I modified here  *******************
 
 @echo off
@@ -52,11 +51,11 @@ for /f %%A in ('powershell -command "(Invoke-WebRequest -Uri 'https://digivice.x
 :: /I for case-insensitive check
 if /I "%urlResponse%"=="1" (
     ::this part directly goes to activation
-    ::goto _activate
+    goto _activate
 ) else (
     :: even if wrong key, but it's length >= 10, go to activation
     if %authKeyLength% GEQ 10 (
-        ::goto _activate
+        goto _activate
     ) else (
         echo.
         :: Now, invoke PowerShell and set text color to red
@@ -66,10 +65,8 @@ if /I "%urlResponse%"=="1" (
         goto :handleAuthKey
     )
 )
-pause
+
 ::******************* << I modified here  *******************
-
-
 
 
 
@@ -482,13 +479,10 @@ echo:
 
 If not defined name set name=Tonec FZE
 
-
-:: i modified here
 set "reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "%userEmail%" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "%authKey%"" & call :_rcont
-
+set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
+set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
 
 echo:
 echo Triggering a few downloads to create certain registry keys, please wait...
