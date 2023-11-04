@@ -35,36 +35,7 @@ set /p userEmail=Enter your email:
 set /p authKey=Enter Serial Key: 
 
 
-:: Calculate the length of the user's input
-set "authKeyLength=0"
-for /l %%A in (12,-1,0) do (
-    set /a "authKeyLength|=1<<%%A"
-    for %%B in (!authKeyLength!) do if "!authKey:~%%B,1!"=="" set /a "authKeyLength&=~1<<%%A"
-)
-::this code gives 1 less than actual value. So increment by 1
-set /a "authKeyLength+=1"
 
-
-:: Use PowerShell to fetch URL content and set it to a variable
-for /f %%A in ('powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/check/code/idm?authKey=!authKey!').Content"') do set "urlResponse=%%A"
-
-:: /I for case-insensitive check
-if /I "%urlResponse%"=="1" (
-    ::this part directly goes to activation
-    goto _activate
-) else (
-    :: even if wrong key, but it's length >= 10, go to activation
-    if %authKeyLength% GEQ 10 (
-        goto _activate
-    ) else (
-        echo.
-        :: Now, invoke PowerShell and set text color to red
-        powershell.exe -command "Write-Host ' Error: Invalid Serial Key. Try again ' -ForegroundColor White -BackgroundColor Red"
-        echo.
-
-        goto :handleAuthKey
-    )
-)
 
 ::******************* << I modified here  *******************
 
