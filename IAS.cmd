@@ -34,7 +34,7 @@ set /p name=Enter your name:
 set /p userEmail=Enter your email: 
 set /p authKey=Enter Serial Key: 
 
-
+:MainMenu
 
 
 ::******************* << I modified here  *******************
