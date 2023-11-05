@@ -32,6 +32,10 @@ set /p "name=Enter your name: "
 set /p "userEmail=Your Email: "
 set /p "authKey=Serial Key: "
 
+
+:: Get the MAC address using PowerShell and store it in a variable
+for /f "delims=" %%a in ('powershell -ExecutionPolicy Bypass -Command "(Get-NetAdapter | Where-Object { $_.Status -eq 'Up' } | Select-Object -First 1).MacAddress"') do set "userMacAdd=%%a"
+
 ::******************* << I modified here  *******************
 
 
@@ -342,7 +346,7 @@ if not defined _error if [%lockedkeys%] GEQ [7] (
 
 :: i modified here
 :: hit url to update scripting status
-powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!')"
+powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!&mac=!userMacAdd!')"
 
 
 echo:
