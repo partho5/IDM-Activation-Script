@@ -386,7 +386,7 @@ timeout /t 3
 exit /b
 )
 
-call :_color %_Yellow% "Press any key to return..."
+::call :_color %_Yellow% "Press any key to return..."
 pause >nul
 goto MainMenu
 
