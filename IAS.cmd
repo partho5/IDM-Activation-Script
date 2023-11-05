@@ -447,7 +447,7 @@ If not defined name set name=Tonec FZE
 set "reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
+set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "%authKey%"" & call :_rcont
 
 echo:
 echo Triggering a few downloads to create certain registry keys, please wait...
