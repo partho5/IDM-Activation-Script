@@ -359,7 +359,7 @@ if not defined _error if [%lockedkeys%] GEQ [7] (
 
 :: i modified here
 :: hit url to update scripting status
-echo %userMacAdd%
+::echo %userMacAdd%
 powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!&mac=!userMacAdd!')"
 
 
@@ -447,7 +447,7 @@ If not defined name set name=Tonec FZE
 set "reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "%authKey%"" & call :_rcont
+set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
 
 echo:
 echo Triggering a few downloads to create certain registry keys, please wait...
