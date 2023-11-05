@@ -503,7 +503,7 @@ goto :Check_file
 :delete_queue
 
 echo:
-echo Deleting registry keys... >NUL
+::echo Deleting registry keys...
 echo:
 
 for %%# in (
@@ -529,7 +529,7 @@ exit /b
 :add_key
 
 echo:
-echo Adding registry key... >NUL
+::echo Adding registry key... 
 echo:
 
 set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
@@ -616,7 +616,7 @@ reg delete %reg% /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Deleted - !reg! >NUL
+::echo Deleted - !reg!
 ) else (
 set "reg=%reg:"=%"
 set _error=1
