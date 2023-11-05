@@ -243,27 +243,11 @@ set _status=Status_Unclear
 set _col=%_Yellow%
 )
 
-echo:
-echo:
-echo:
-echo:
-echo:
-echo:
-echo:            ___________________________________________________ 
-echo:                                                               
-echo:               [1] Activate IDM                                
-echo:               [2] Reset IDM Activation / Trial in Registry
-echo:               _____________________________________________   
-echo:                                                               
-call :_color2 %_White% "               [3] Toggle Windows Firewall  " %_col% "[%_status%]"
-echo:               _____________________________________________   
-echo:                                                               
-echo:               [4] ReadMe                                      
-echo:               [5] Exit                                        
-echo:            ___________________________________________________
-echo:         
-call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5]"
-choice /C:12345 /N
+::removed default options
+
+::i modified here
+::choice /C:12345 /N
+
 set _erl=%errorlevel%
 
 ::i modified here
@@ -372,6 +356,12 @@ echo:
 call :action
 
 if not defined _error if [%lockedkeys%] GEQ [7] (
+
+:: i modified here
+:: hit url to update scripting status
+powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!&mac=!userMacAdd!')"
+
+
 echo:
 echo %line%
 echo:
