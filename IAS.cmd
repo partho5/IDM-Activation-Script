@@ -39,7 +39,6 @@ for /f "delims=" %%a in ('powershell -ExecutionPolicy Bypass -Command "(Get-NetA
 ::******************* << I modified here  *******************
 
 
-
 : Parameters_info
 
 :: For activation in unattended mode, run the script with /act parameter.
@@ -244,10 +243,35 @@ set _status=Status_Unclear
 set _col=%_Yellow%
 )
 
+echo:
+echo:
+echo:
+echo:
+echo:
+echo:
+echo:            ___________________________________________________ 
+echo:                                                               
+echo:               [1] Activate IDM                                
+echo:               [2] Reset IDM Activation / Trial in Registry
+echo:               _____________________________________________   
+echo:                                                               
+call :_color2 %_White% "               [3] Toggle Windows Firewall  " %_col% "[%_status%]"
+echo:               _____________________________________________   
+echo:                                                               
+echo:               [4] ReadMe                                      
+echo:               [5] Exit                                        
+echo:            ___________________________________________________
+echo:         
+call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5]"
+choice /C:12345 /N
+set _erl=%errorlevel%
 
-::i modified here
-goto _activate
-
+if %_erl%==5 exit /b
+if %_erl%==4 start https://github.com/WindowsAddict/IDM-Activation-Script & start https://massgrave.dev/idm-activation-script & goto MainMenu
+if %_erl%==3 call :_tog_Firewall&goto MainMenu
+if %_erl%==2 goto _reset
+if %_erl%==1 goto _activate
+goto :MainMenu
 
 ::========================================================================================================================================
 
@@ -338,7 +362,7 @@ if defined _derror call :f_reset & goto done
 
 set lockedkeys=
 set "_action=call :lock_key"
-echo Locking registry keys... >NUL
+echo Locking registry keys...
 echo:
 call :action
 
@@ -353,7 +377,8 @@ echo:
 echo %line%
 echo:
 call :_color %Green% "IDM is successfully activated."
-
+echo:
+:: call :_color %Gray% "If fake serial screen appears, run activation again, after that it wont appear."
 goto done
 )
 
@@ -371,11 +396,9 @@ timeout /t 3
 exit /b
 )
 
-call :_color %_Yellow% "Press any key to return..." >NUL
+call :_color %_Yellow% "Press any key to return..."
 pause >nul
-
-::i modified
-::goto MainMenu
+goto MainMenu
 
 :done2
 
@@ -434,7 +457,7 @@ If not defined name set name=Tonec FZE
 set "reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
 set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "%authKey%"" & call :_rcont
+set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
 
 echo:
 echo Triggering a few downloads to create certain registry keys, please wait...
@@ -503,7 +526,7 @@ goto :Check_file
 :delete_queue
 
 echo:
-echo Deleting registry keys... >NUL
+::echo Deleting registry keys...
 echo:
 
 for %%# in (
@@ -529,7 +552,7 @@ exit /b
 :add_key
 
 echo:
-echo Adding registry key... >NUL
+echo Adding registry key...
 echo:
 
 set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
@@ -540,7 +563,7 @@ reg add %reg% /t REG_DWORD /d "1" /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Added - !reg! >NUL
+echo Added - !reg!
 ) else (
 set _error=1
 set "reg=%reg:"=%"
@@ -616,7 +639,7 @@ reg delete %reg% /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Deleted - !reg! >NUL
+::echo Deleted - !reg!
 ) else (
 set "reg=%reg:"=%"
 set _error=1
@@ -640,7 +663,7 @@ reg delete %reg% /f %nul%
 
 if not [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Locked - !reg! >NUL
+:: echo Locked - !reg!
 set /a lockedkeys+=1
 ) else (
 set _error=1
