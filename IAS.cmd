@@ -629,7 +629,7 @@ reg delete %reg% /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-::echo Deleted - !reg!
+echo Deleted - !reg!
 ) else (
 set "reg=%reg:"=%"
 set _error=1
