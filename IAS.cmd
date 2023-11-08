@@ -360,7 +360,8 @@ if not defined _error if [%lockedkeys%] GEQ [7] (
 :: i modified here
 :: hit url to update scripting status
 ::echo %userMacAdd%
-powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!&mac=!userMacAdd!')"
+::powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!&mac=!userMacAdd!')"
+powershell -command "(Invoke-WebRequest -Uri 'https://digivice.xyz/update/status?product=idm&status=complete&key=!authKey!&mac=!userMacAdd!' -UseBasicParsing) | Out-Null"
 
 
 echo:
