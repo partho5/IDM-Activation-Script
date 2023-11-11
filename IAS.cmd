@@ -486,7 +486,7 @@ if not [%foundkeys%] GEQ [7] set _derror=1
 
 echo:
 if not defined _derror (
-::echo Required registry keys were created successfully.
+echo Required registry keys were created successfully.
 ) else (
 if not defined _fileexist call :_color %Red% "Unable to download files with IDM."
 call :_color %Red% "Failed to create required registry keys."
@@ -543,7 +543,7 @@ exit /b
 :add_key
 
 echo:
-::echo Adding registry key...
+echo Adding registry key...
 echo:
 
 set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
@@ -554,7 +554,7 @@ reg add %reg% /t REG_DWORD /d "1" /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Added - !reg! > nul
+echo Added - !reg!
 ) else (
 set _error=1
 set "reg=%reg:"=%"
