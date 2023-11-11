@@ -289,7 +289,7 @@ reg query "HKCU\Software\DownloadManager" "/v" "Serial" %nul% && (
 %idmcheck% && taskkill /f /im idman.exe
 )
 
-if exist "!_appdata!\DMCache\settings.bak" del /s /f /q "!_appdata!\DMCache\settings.bak" > nul 2>&1
+if exist "!_appdata!\DMCache\settings.bak" del /s /f /q "!_appdata!\DMCache\settings.bak"
 
 set "_action=call :delete_key"
 call :reset
@@ -334,11 +334,11 @@ call :_color %Red% "Unable to connect internetdownloadmanager.com, aborting..."
 goto done
 )
 
-::echo Internet is connected.
+echo Internet is connected.
 
 %idmcheck% && taskkill /f /im idman.exe
 
-if exist "!_appdata!\DMCache\settings.bak" del /s /f /q "!_appdata!\DMCache\settings.bak" > nul 2>&1
+if exist "!_appdata!\DMCache\settings.bak" del /s /f /q "!_appdata!\DMCache\settings.bak"
 
 set "_action=call :delete_key"
 call :reset
@@ -517,7 +517,7 @@ goto :Check_file
 :delete_queue
 
 echo:
-::echo Deleting registry keys...
+echo Deleting registry keys...
 echo:
 
 for %%# in (
@@ -630,7 +630,7 @@ reg delete %reg% /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Deleted - !reg! > nul
+echo Deleted - !reg!
 ) else (
 set "reg=%reg:"=%"
 set _error=1
@@ -654,7 +654,7 @@ reg delete %reg% /f %nul%
 
 if not [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Locked - !reg! > nul
+echo Locked - !reg!
 set /a lockedkeys+=1
 ) else (
 set _error=1
