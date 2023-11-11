@@ -351,7 +351,7 @@ if defined _derror call :f_reset & goto done
 
 set lockedkeys=
 set "_action=call :lock_key"
-echo Locking registry keys...
+::echo Locking registry keys...
 echo:
 call :action
 
@@ -451,7 +451,7 @@ set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" &
 set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "%authKey%"" & call :_rcont
 
 echo:
-echo Triggering a few downloads to create certain registry keys, please wait...
+::echo Triggering a few downloads to create certain registry keys, please wait...
 
 set "file=%_temp%\temp.png"
 set _fileexist=
@@ -486,7 +486,7 @@ if not [%foundkeys%] GEQ [7] set _derror=1
 
 echo:
 if not defined _derror (
-echo Required registry keys were created successfully.
+::echo Required registry keys were created successfully.
 ) else (
 if not defined _fileexist call :_color %Red% "Unable to download files with IDM."
 call :_color %Red% "Failed to create required registry keys."
@@ -543,7 +543,7 @@ exit /b
 :add_key
 
 echo:
-echo Adding registry key...
+::echo Adding registry key...
 echo:
 
 set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
@@ -554,7 +554,7 @@ reg add %reg% /t REG_DWORD /d "1" /f %nul%
 
 if [%errorlevel%]==[0] (
 set "reg=%reg:"=%"
-echo Added - !reg!
+echo Added - !reg! > nul
 ) else (
 set _error=1
 set "reg=%reg:"=%"
