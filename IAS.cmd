@@ -351,7 +351,7 @@ if defined _derror call :f_reset & goto done
 
 set lockedkeys=
 set "_action=call :lock_key"
-::echo Locking registry keys...
+echo Locking registry keys...
 echo:
 call :action
 
@@ -451,7 +451,7 @@ set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" &
 set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "%authKey%"" & call :_rcont
 
 echo:
-::echo Triggering a few downloads to create certain registry keys, please wait...
+echo Triggering a few downloads to create certain registry keys, please wait...
 
 set "file=%_temp%\temp.png"
 set _fileexist=
